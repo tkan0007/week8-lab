@@ -7,26 +7,129 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div class="form-group">
-  <label for="item">Enter Your Items:</label>
-  <input class="form-control" [(ngModel)]="item" id="item" />
+<!-- Name -->
+<div class ="input-group mt-3 mx-3">
+  <div class = "mx-3 mb-3 w-25">
+    <label for="firstName">Enter Your First Name:</label>
+    <input class="form-control" [(ngModel)]="firstName" type="text"/>
+  </div>
+
+  <div class = "mx-3 mb-3 w-25">
+      <label for="lastName">Enter Your Last Name:</label><br>
+      <input class="form-control" [(ngModel)]="lastName" id="lastName" type="text" />
+  </div>
 </div>
+
+<!-- Date of Birth -->
+<div class = "input-group mt-3 mx-3">
+  <div class = "mx-3 mb-3 w-25">
+    <label for="suburb">Date of Birth:</label><br>
+    <input class="form-control" [(ngModel)]="dob" id="dob" type="date"/>
+  </div>
+</div>
+
+<!-- Address -->
+<div class = "input-group mt-3 mx-3">
+  <div class = "mx-3 mb-3 w-25">
+    <label for="suburb">Suburb:</label><br>
+    <input class="form-control" [(ngModel)]="suburb" id="suburb" type="text" />
+  </div>
+
+  <div class = "mx-3 mb-3 w-25">
+    <label for="state">State:</label><br>
+    <select class="form-control" [(ngModel)]="state" id="state">
+      <option>ACT</option>
+      <option>NSW</option>
+      <option>NT</option>
+      <option>QLD</option>
+      <option>SA</option>
+      <option>TAS</option>
+      <option>VIC</option>
+      <option>WA</option>
+    </select>
+  </div>
+
+  <div class = "mx-3 mb-3 w-25">
+    <label for="postcode">Postcode:</label><br>
+    <input class="form-control" [(ngModel)]="postcode" id="postcode" type="number"/>
+  </div>
+</div>
+
+<!-- Number of Patient-->
+<div class = "input-group mt-3 mx-3">
+  <div class = "mx-3 mb-3 w-25">
+    <label for="numPatient">Number of Patients:</label><br>
+    <input class="form-control" [(ngModel)]="numPatient" id="numPatient" type="number" required minLength="1"/>
+  </div>
+</div>
+
+<!-- Button-->
+<!-- useless validation check -->
 <br>
-<button class="btn btn-primary" (click)="newItem()">Add Item</button>
-<button class="btn btn-danger" (click)="clearItems()">Clear Items</button>
-<br>
-<div *ngIf="data.length>0">You have {{data.length}} items</div>
-<div *ngIf="data.length==5">Caution: 5 items in your array</div>
-<br>
-<table class="table table-hover">
-  <tr>
-    <th> # </th>
-    <th> Item </th>
-  </tr>
-  <tr *ngFor="let item of data; let i = index">
-    <td>{{i+1}}</td>
-    <td>{{item}}</td>
-  </tr>
+<div class="btn-group mx-3 mb-5">
+  <div *ngIf = "numPatient < 0 ; then thenAddDoctorBlock else elseAddDoctorBlock"></div>
+
+  <ng-template #thenAddDoctorBlock>
+    <div *ngIf = "doctorDB.length >= 0">
+      <button class="btn btn-primary mx-3" (click)="saveDoctor()" disabled>Add doctor <mark>{{doctorDB.length}}</mark></button>
+    </div>
+  </ng-template>
+  <ng-template #elseAddDoctorBlock>
+  <div *ngIf = "doctorDB.length >= 0">
+    <button class="btn btn-primary mx-3" (click)="saveDoctor()">Add Item <mark>{{doctorDB.length}}</mark></button>
+  </div>
+  </ng-template>
+
+  <div *ngIf = "doctorDB.length==0; then thenBlock else elseBlock"></div>
+
+  <ng-template #thenBlock>
+    <button class="btn btn-danger mx-3" (click)="clearNoPatient()" disabled>Remove Doctor <mark>{{countZero}}</mark></button>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <button class="btn btn-danger mx-3" (click)="clearNoPatient()">Remove Doctor <mark>{{countZero}}</mark></button>
+  </ng-template>
+</div>
+
+<!-- Caution -->
+<div class="text-grounp mx-3 mb-2 w-25">
+  <div class = "mx-3 text-warning bg-dark" *ngIf = "numPatient == 0" >
+    Number of patients is 0 !
+  </div>
+</div>
+
+<!--
+  <div *ngIf="doctorDB.length>0">You have {{doctorDB.length}} doctors</div>
+<div *ngIf="doctorDB.length==5">Caution: 5 items in your array</div>
+-->
+
+<!-- Table -->
+<table class="table table-hover table-striped">
+  <thead class= "table-dark">
+    <tr>
+      <th> # </th>
+      <th> First name </th>
+      <th> Last name </th>
+      <th> Date of Birth </th>
+      <th> Suburb </th>
+      <th> State </th>
+      <th> Number of Patient </th>
+      <th> Delete </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of doctorDB; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.dob}}</td>
+      <td>{{item.suburb}}</td>
+      <td>{{item.state}}</td>
+      <td>{{item.numPatient}}</td>
+      <td><button type="button" class="btn btn-danger btn-block btn-sm" (click)="clearDoctor(i)">X</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 
