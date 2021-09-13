@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'lab';
+  data: any[] = [];
+  item = "";
+  newItem() {
+    this.data.push(this.item);
+  }
+  clearItems() {
+    this.data = [];
+  }
 }
