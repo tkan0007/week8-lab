@@ -42,7 +42,7 @@ export class AppComponent {
         this.doctorDB.splice(i,1);
         i = 0; // to check from first because of splice working.
       }
-      if(this.doctorDB.length == 1){
+      if(this.doctorDB.length == 1){ // because not check i = 0
         if(this.doctorDB[0].numPatient == 0){
           this.doctorDB.splice(0,1);
         }
