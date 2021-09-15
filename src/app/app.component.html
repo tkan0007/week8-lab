@@ -104,7 +104,7 @@
 -->
 
 <!-- Table -->
-<table class="table table-hover table-striped">
+<table class="table table-hoverd">
   <thead class= "table-dark">
     <tr>
       <th> # </th>
@@ -119,35 +119,25 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of doctorDB; let i = index">
+    <tr *ngFor="let item of doctorDB; let i = index" [ngClass] = "{'table-info': item.numPatient > 10}">
       <!-- index -->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{i+1}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{i+1}}</td>
+      <td>{{i+1}}</td>
       <!-- firstname-->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.firstName}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.firstName}}</td>
+      <td>{{item.firstName}}</td>
       <!-- lastname-->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.lastName}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.lastName}}</td>
+      <td>{{item.lastName}}</td>
       <!-- Dob -->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.dob}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.dob}}</td>
+      <td>{{item.dob}}</td>
       <!--Suburb-->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.suburb}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.suburb}}</td>
+      <td>{{item.suburb}}</td>
       <!-- State-->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.state}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.state}}</td>
+      <td>{{item.state}}</td>
       <!-- Postcode -->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.postcode}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.postcode}}</td>
+      <td>{{item.postcode}}</td>
       <!-- number of Patient-->
-      <td *ngIf = "item.numPatient > 10" class = "table-info">{{item.state}}</td>
-      <td *ngIf = "item.numPatient <= 10">{{item.numPatient}}</td>
+      <td>{{item.numPatient}}</td>
       <!-- Button -->
-      <td *ngIf = "item.numPatient > 10" class = "table-info"><button type="button" class="btn btn-danger btn-block btn-sm" (click)="clearDoctor(i)">X</button></td>
-      <td *ngIf = "item.numPatient <= 10"><button type="button" class="btn btn-danger btn-block btn-sm" (click)="clearDoctor(i)">X</button>
-      </td>
+      <td><button type="button" class="btn btn-danger btn-block btn-sm" (click)="clearDoctor(i)">X</button></td>
     </tr>
   </tbody>
 </table>
